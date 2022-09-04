@@ -79,8 +79,7 @@ const handler = [
             return msg.includes('grasscutter') || msg.includes('gs') || msg.includes('除草机')
         },
         handle(msg) {
-            msg.reply('项目地址: https://github.com/Grasscutters/Grasscutter/', true)
-            msg.reply('项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/', true)
+            msg.reply('项目地址: https://github.com/Grasscutters/Grasscutter/   \n项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/', true)
         }
     }),
     defineHandle({
