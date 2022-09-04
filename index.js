@@ -1,7 +1,7 @@
 "use strict"
 const { createClient } = require("oicq")
 
-const account = 0
+const account = 3481477273
 
 const bot = createClient(account)
 
@@ -15,6 +15,7 @@ bot
 .login()
 
 exports.bot = bot
+exports.account = account
 
 // template plugins
 require("./plugin-hello") //hello world
