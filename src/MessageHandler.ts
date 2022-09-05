@@ -77,6 +77,15 @@ const handler: Array<Handle> = [
     {
         match({raw_message: msg}) {
 
+            return msg.includes('白屏')
+        },
+        handle(client) {
+            client.reply(messages.error_white, true)
+        }
+    },
+    {
+        match({raw_message: msg}) {
+
             return msg.includes('4206')
         },
         handle(client) {
@@ -89,7 +98,7 @@ const handler: Array<Handle> = [
             return msg.includes('端口') && msg.includes('占用')
         },
         handle(client) {
-            client.reply(messages.error_4206, true)
+            client.reply(messages.error_port, true)
         }
     },
     {
