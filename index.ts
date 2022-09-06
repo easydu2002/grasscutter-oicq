@@ -19,12 +19,9 @@ bot
 })
 .login()
 
-
-bot.on("message.group", handleMessage)
-bot.on("notice.group.increase", info => {
-	
-	bot.sendGroupMsg(info.group_id, messages.welcome(info))
-})
+bot.on("message.private", handleMessage)
+bot.on("message.group",e => e.atme && handleMessage(e))
+bot.on("notice.group.increase", e => bot.sendGroupMsg(e.group_id, messages.welcome(e)))
 
 process.on("unhandledRejection", (reason, promise) => {
 	console.log('Unhandled Rejection at:', promise, 'reason:', reason)

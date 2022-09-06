@@ -1,3 +1,4 @@
+import { getContent } from './util/MessageUtils';
 import { messages } from './messages';
 import { Client, PrivateMessageEvent } from "oicq"
 import { DiscussMessageEvent } from "oicq"
@@ -8,7 +9,7 @@ import { segment } from "oicq"
 /**
  * 回复消息
  */
-export const replyMessage = function(msg: GroupMessageEvent, content: Sendable) {
+export const replyMessage = function(msg: GroupMessageEvent | PrivateMessageEvent, content: Sendable) {
     if(typeof content === 'string') {
         msg.reply(content, true)
     }else if(typeof content === 'object') {
@@ -22,117 +23,58 @@ interface Handle {
     /**
      * 匹配
      */
-    match: (client: GroupMessageEvent) => Boolean,
+    match: (messageEvent: GroupMessageEvent | PrivateMessageEvent) => Boolean,
     /**
      * 处理
      */
-    handle: (client: GroupMessageEvent) => void,
+    handle: (messageEvent: GroupMessageEvent | PrivateMessageEvent) => void,
 }
 
 const handler: Array<Handle> = [
     {
-        match({raw_message: msg}) {
-
-            return (msg.includes('解锁') || msg.includes('开放')) && (msg.includes('地图') || msg.includes('传送'))
-        },
-        handle(client) {
-            client.reply(messages.unlock_map, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(解锁|开放|激活|开启)[\s\S]*(地图|传送|锚点)/g),
+        handle: messageEvent => messageEvent.reply(messages.unlock_map, true)
     },
     {
-        match({raw_message: msg}) {
-
-            return (msg.includes('解锁') || msg.includes('获取')) && (msg.includes('物品') || msg.includes('角色') || msg.includes('武器'))
-        },
-        handle(client) {
-            client.reply(messages.all, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(解锁|获取|激活)[\s\S]*(物品|角色|武器)/g),
+        handle: messageEvent => messageEvent.reply(messages.all, true)
     },
     {
-        match({raw_message: msg}) {
-            return (msg.includes('冒险等级') || msg.includes('世界等级'))
-        },
-        handle(client) {
-            client.reply(messages.player_level, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(世界|冒险)[\s\S]*(等级|级别|level)/g),
+        handle: messageEvent => messageEvent.reply(messages.player_level, true)
     },
     {
-        match({raw_message: msg}) {
-
-            return msg.includes('补丁') && (msg.includes('位置') || msg.includes('路径'))
-        },
-        handle(client) {
-            client.reply(messages.patch_path, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(补丁)[\s\S]*(位置|路径)/g),
+        handle: messageEvent => messageEvent.reply(messages.patch_path, true)
     },
     {
-        match({raw_message: msg}) {
-
-            return msg.includes('4214')
-        },
-        handle(client) {
-            client.reply(messages.error_4214, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(4214)/g),
+        handle: messageEvent => messageEvent.reply(messages.error_4214, true)
     },
     {
-        match({raw_message: msg}) {
-
-            return msg.includes('白屏')
-        },
-        handle(client) {
-            client.reply(messages.error_white, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(白屏)/g),
+        handle: messageEvent => messageEvent.reply(messages.error_white, true)
     },
     {
-        match({raw_message: msg}) {
-
-            return msg.includes('4206')
-        },
-        handle(client) {
-            client.reply(messages.error_4206, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(4206)/g),
+        handle: messageEvent=> messageEvent.reply(messages.error_4206, true)
     },
     {
-        match({raw_message: msg}) {
-
-            return msg.includes('端口') && msg.includes('占用')
-        },
-        handle(client) {
-            client.reply(messages.error_port, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(端口)[\s\S](占用)/g),
+        handle: messageEvent => messageEvent.reply(messages.error_port, true)
     },
     {
-        match({raw_message: msg}) {
-
-            msg = msg.toLocaleLowerCase()
-            return msg.includes('grasscutter') || msg.includes('gs') || msg.includes('除草机')
-        },
-        handle(client) {
-            client.reply(messages.grasscutter, true)
-        }
+        match: ({raw_message: msg}) => !!msg.match(/(grasscutter|gs|除草)/gi),
+        handle: messageEvent => messageEvent.reply(messages.grasscutter, true)
     },
     {
-        match(client) {
-            
-            return client.atme
-        },
-        handle(client) {
-            
-            const atInfo = client.message.find(item => item.type === 'at')
-            if(!atInfo) return
-            
-            // @ts-ignore
-            const content = client.raw_message.slice(atInfo.text.length)
-            content.trim() ? replyMessage(client, messages.not) : replyMessage(client, messages.empty)
-            
-        }
+        match: () => true,
+        handle: messageEvent => getContent(messageEvent) ? replyMessage(messageEvent, messages.not) : replyMessage(messageEvent, messages.empty)
     },
 ]
 
-export const handleMessage = function(client: GroupMessageEvent) {
+export const handleMessage = function(messageEvent: GroupMessageEvent | PrivateMessageEvent) {
     
-    if(!client.atme) return
-
-    const handle = handler.find(item => item.match(client))
-    handle && handle.handle(client)
+    const handle = handler.find(item => item.match(messageEvent))
+    handle && handle.handle(messageEvent)
 }

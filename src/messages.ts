@@ -6,16 +6,18 @@ import { MemberIncreaseEvent, segment } from "oicq";
  * 组合消息图片不能webp, 不然PC Tim看不了
  */
 export const messages =  {
-
-  "grasscutter": "项目地址: https://github.com/Grasscutters/Grasscutter/\n项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/",
-
+  
   "welcome": (info: MemberIncreaseEvent) => 
     [
-      `Hi~, 欢迎新成员 @${info.user_id} ! \n项目地址: https://github.com/Grasscutters/Grasscutter/\n`,
+      'Hi~, 欢迎新成员 ',
+      segment.at(info.nickname),
+      '! \n项目地址: https://github.com/Grasscutters/Grasscutter/\n',
       '项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/ \n',
       '有问题可以尝试@我~\n',
       segment.image('https://grasscutter-oicq.oss-cn-hangzhou.aliyuncs.com/message/welcome2.jpg'),
     ],
+
+  "grasscutter": "项目地址: https://github.com/Grasscutters/Grasscutter/\n项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/",
 
   "unlock_map": "解锁全部地图: /prop unlockmap 1",
   
