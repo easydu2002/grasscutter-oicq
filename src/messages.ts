@@ -10,7 +10,7 @@ export const messages =  {
   "welcome": (info: MemberIncreaseEvent) => 
     [
       'Hi~, 欢迎新成员 ',
-      segment.at(info.nickname),
+      segment.at(info.user_id, info.nickname, true),
       '! \n项目地址: https://github.com/Grasscutters/Grasscutter/\n',
       '项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/ \n',
       '有问题可以尝试@我~\n',
