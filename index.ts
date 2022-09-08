@@ -4,11 +4,9 @@ import { handleMessage } from "./src/MessageHandler"
 
 import { createClient } from "oicq"
 import { messages } from "./src/messages"
+import config from './config.json'
 
-
-const account = 3481477273
-
-const bot = createClient(account)
+const bot = createClient(config.account)
 
 bot
 .on("system.login.qrcode", function (e) {
