@@ -4,7 +4,19 @@ import { handleMessage } from "./src/MessageHandler"
 
 import { createClient } from "oicq"
 import { messages } from "./src/messages"
-import config from './config.json'
+
+interface Config {
+
+	"account": number,
+	"server": {
+		"host": string
+		"port": string,
+		"token": string
+	}
+}
+
+
+const config: Config = require('./config.json') 
 
 const bot = createClient(config.account)
 
@@ -25,4 +37,4 @@ process.on("unhandledRejection", (reason, promise) => {
 	console.log('Unhandled Rejection at:', promise, 'reason:', reason)
 })
 
-exports.bot = bot
+export { bot, config }

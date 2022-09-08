@@ -5,6 +5,7 @@ import { DiscussMessageEvent } from "oicq"
 import { Sendable } from "oicq"
 import { GroupMessageEvent } from "oicq"
 import { segment } from "oicq"
+import { getOnlinePlayer } from './api/opencommand-api';
 
 /**
  * 回复消息
@@ -70,6 +71,18 @@ const handler: Array<Handle> = [
     {
         match: ({raw_message: msg}) => !!msg.match(/(grasscutter|gs|除草)/gi),
         handle: messageEvent => messageEvent.reply(messages.grasscutter, true)
+    },
+    {
+        match: ({raw_message: msg}) => !!msg.match(/(在线)/g),
+        handle: messageEvent => {
+            
+            getOnlinePlayer()
+                .then(resp => {
+                    messageEvent.reply(JSON.stringify(resp), true)
+                }).catch(err => {
+                    messageEvent.reply(JSON.stringify(err), true)
+                })
+        }
     },
     {
         match: () => true,

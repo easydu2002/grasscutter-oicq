@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node ./index.ts"
+    "dev": "ts-node ./index.ts",
+    "test": "ts-node ./test/index.ts"
   },
   "author": "",
   "license": "MIT",
