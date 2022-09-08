@@ -44,7 +44,7 @@ const handler: Array<Handle> = [
         handle: messageEvent => messageEvent.reply(messages.player_level, true)
     },
     {
-        match: ({raw_message: msg}) => !!msg.match(/(补丁)[\s\S]*(位置|路径)/g),
+        match: ({raw_message: msg}) => !!msg.match(/(补丁)/g),
         handle: messageEvent => messageEvent.reply(messages.patch_path, true)
     },
     {
@@ -62,6 +62,10 @@ const handler: Array<Handle> = [
     {
         match: ({raw_message: msg}) => !!msg.match(/(端口)[\s\S](占用)/g),
         handle: messageEvent => messageEvent.reply(messages.error_port, true)
+    },
+    {
+        match: ({raw_message: msg}) => !!msg.match(/(sspi|超时)/gi),
+        handle: messageEvent => messageEvent.reply(messages.sspi_error, true)
     },
     {
         match: ({raw_message: msg}) => !!msg.match(/(grasscutter|gs|除草)/gi),
