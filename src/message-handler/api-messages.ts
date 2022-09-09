@@ -72,8 +72,8 @@ export const apiHandlers: Array<MessageHandler> = [
           const endTime = performance.now()
 
           const replyMsg = [
+            `本次请求时间: ${((endTime-startTime).toFixed(2))}ms\n`,
             `操作结果: \n${resp.data}`,
-            `本次请求时间: ${((endTime-startTime).toFixed(2))}ms\n`
           ]
           messageEvent.reply(replyMsg, true)
 
