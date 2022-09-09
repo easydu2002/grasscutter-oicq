@@ -5,11 +5,14 @@ import { post } from "../util/request-util"
 const basePATH = '/opencommand/api'
 
 
+// 在线玩家
 export const getOnlinePlayer = () => post(basePATH, {
     "action": "online"
 })
 
-export const executeCommand = (command: string, ) => post(basePATH, {
-    "action": "online",
-    "token": config.server.token
+// 执行命令
+export const executeCommand = (command: string ) => post(basePATH, {
+    "action": "command",
+    "token": config.server.token,
+    "data": command
 })

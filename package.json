@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node ./index.ts",
-    "test": "ts-node ./test/index.ts"
+    "test": "ts-node ./test/index.test.ts"
   },
   "author": "",
   "license": "MIT",

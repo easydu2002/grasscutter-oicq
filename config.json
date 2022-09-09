@@ -1,8 +1,9 @@
 {
   "account": 3481477273,
+  "admin": 1307053737,
   "server": {
-    "host": "103.45.103.138",
-    "port": "443",
-    "token": "xxxxxxxxx"
+    "host": "xxx.xxx.xxx.xxx",
+    "port": "xxx",
+    "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   }
 }

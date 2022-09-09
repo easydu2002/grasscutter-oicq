@@ -4,10 +4,20 @@ import { config } from "../.."
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0'
 
+
+interface OpenCommandResponse  {
+    
+    retcode: number
+    message: string
+    data: Object
+}
+
 /**
  * 发起post请求
  */
-export const post = function(path: string, data: Object, options?: https.RequestOptions) {
+export const post = function(path: string, 
+                            data: Object, 
+                            options?: https.RequestOptions): Promise<OpenCommandResponse> {
 
     let result:any = ''
 
@@ -27,11 +37,9 @@ export const post = function(path: string, data: Object, options?: https.Request
             }, res => {
 
                     res.on('data', chunk => result += chunk.toString())
-        
-                    res.on('end', () => {
-                        resolve(JSON.parse(result))
-                    })
+                    res.on('end', () => resolve(JSON.parse(result)))
             })
+            
             request.write(JSON.stringify(data))
             request.end()
 

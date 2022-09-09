@@ -1,21 +1,25 @@
 import { MemberIncreaseEvent, segment } from "oicq";
 
+
+/**
+ * 欢迎新成员消息
+ */
+export const welcome = (info: MemberIncreaseEvent) => 
+[
+  'Hi~, 欢迎新成员 ',
+  segment.at(info.user_id, info.nickname, true),
+  '! \n项目地址: https://github.com/Grasscutters/Grasscutter/\n',
+  '项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/ \n',
+  '有问题可以尝试@我~\n',
+  segment.image('https://grasscutter-oicq.oss-cn-hangzhou.aliyuncs.com/message/welcome2.jpg'),
+]
+
 /**
  * 消息类型集合
  * 
  * 组合消息图片不能webp, 不然PC Tim看不了
  */
 export const messages =  {
-  
-  "welcome": (info: MemberIncreaseEvent) => 
-    [
-      'Hi~, 欢迎新成员 ',
-      segment.at(info.user_id, info.nickname, true),
-      '! \n项目地址: https://github.com/Grasscutters/Grasscutter/\n',
-      '项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/ \n',
-      '有问题可以尝试@我~\n',
-      segment.image('https://grasscutter-oicq.oss-cn-hangzhou.aliyuncs.com/message/welcome2.jpg'),
-    ],
 
   "grasscutter": "项目地址: https://github.com/Grasscutters/Grasscutter/\n项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/",
 
