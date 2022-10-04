@@ -8,8 +8,11 @@ export const welcome = (info: MemberIncreaseEvent) =>
 [
   'Hi~, 欢迎新成员 ',
   segment.at(info.user_id, info.nickname, true),
-  '! \n项目地址: https://github.com/Grasscutters/Grasscutter/\n',
-  '项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/ \n',
+  '! \n项目地址: https://github.com/Grasscutters/Grasscutter\n',
+  '最新包发布地址: https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter \n',
+  'Resources 地址: https://github.com/tamilpp25/Grasscutter_Resources \n',
+  '打补丁工具地址: https://github.com/Bambi5/Collei_Launcher\n',
+  '群提供服务地址:  43.139.54.74:20000 \n 账号申请: @我 申请账号 即可\n',
   '有问题可以尝试@我~\n',
   segment.image('https://grasscutter-oicq.oss-cn-hangzhou.aliyuncs.com/message/welcome2.jpg'),
 ]
@@ -37,6 +40,8 @@ export const messages =  {
   "error_4206": "1. 检查防火墙, 端口是否正常开放(80、443、8888和22102), 22102需要使用UDP协议\n2. 服务器未正确配置 HTTPS\n3. 检查config.json databaseInfo.server.http.accessAddress是否是服务器IP",
   
   "error_4214": "确认后端resources客户端版本一致, 然后补丁也打了还是4214, 可以尝试关闭代理, 进官服启动器修复资源, 再打补丁",
+  
+  "error_500": "1. 确认代理正常 \n 2. 3.0版本后续需要修补UA",
 
   "error_port": "Windows: cmd输入 netstat -ano | findstr 占用端口, 最后一列值为PID, 再执行 /taskkill/PID pid /F\nLinux: netstat -tunlp | grep 占用端口 最后一列值为PID/xxx, 再执行kill PID即可",
   
