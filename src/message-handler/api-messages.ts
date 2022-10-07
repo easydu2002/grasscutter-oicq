@@ -1,3 +1,4 @@
+import { GroupMessageEvent } from 'oicq';
 import os from 'os'
 import { getContent, isAdmin } from './../util/MessageUtils';
 import { executeCommand, getOnlinePlayer } from '../api/opencommand-api';
@@ -73,7 +74,14 @@ export const apiHandlers: Array<MessageHandler> = [
             // ]).then((resp) => {
               
               messageEvent.reply('申请成功, 账号信息已发送至私信!', true)
-              bot.sendPrivateMsg(qq, `服务器地址: 43.139.54.74:20000 \n${'='.repeat(10)}\n 登录信息:\n账号: ${username}\n密码: ${password}`)
+              const privateMsg = `服务器地址: 43.139.54.74:20000 \n${'='.repeat(10)}\n 登录信息:\n账号: ${username}\n密码: ${password}`
+              
+              if(messageEvent.message_type === 'group') {
+                const group = messageEvent as GroupMessageEvent
+                bot.pickMember(group.group_id, qq).sendMsg(privateMsg)
+              }else {
+                bot.sendPrivateMsg(qq, privateMsg)
+              }
             // }).catch(err => {
             //   throw Error(err)
             // })
