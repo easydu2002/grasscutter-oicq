@@ -36,3 +36,15 @@ export const defineCommand = function(command: Command): Command {
 
   return command
 }
+
+
+export const getCommandDescripion = function(command: Command) {
+
+  return [
+    `命令: ${command.label}`,
+    `${command.alias ? '别名: ' + command.alias.join(',') + '\n' : ''}`,
+    `用法:`,
+    `${ command.usage ? command.usage.map(usage => ` - ${command.label}${usage}`).join('\n') : ' - ' + command.label }`,
+    `${ '='.repeat(11) }\n`
+  ].join('\n')
+}

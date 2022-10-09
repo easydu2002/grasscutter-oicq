@@ -1,4 +1,4 @@
-import { defineCommand, Command } from './../command';
+import { defineCommand, Command, getCommandDescripion } from './../command';
 import CommandMap from '../CommandMap';
 
 
@@ -9,16 +9,7 @@ export const HelpCommand:Command = defineCommand({
   
   execute(sender) {
 
-    const replyMsg = CommandMap.commands.map((item, key) => {
-
-      return [
-        `命令: ${item.label}`,
-        `${item.alias ? '别名: ' + item.alias.join(',') + '\n' : ''}`,
-        `用法:`,
-        `${ item.usage ? item.usage.map(usage => ` - ${item.label}${usage}`).join('\n') : ' - ' + item.label }`,
-        `${ '='.repeat(11) }\n`
-      ].join('\n')
-    })
+    const replyMsg = CommandMap.commands.map(getCommandDescripion)
 
     return sender.reply(replyMsg)
   }

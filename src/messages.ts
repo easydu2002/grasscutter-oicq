@@ -1,4 +1,5 @@
 import { MemberIncreaseEvent, segment } from "oicq";
+import { config } from "..";
 
 
 /**
@@ -8,12 +9,7 @@ export const welcome = (info: MemberIncreaseEvent) =>
 [
   'Hi~, 欢迎新成员 ',
   segment.at(info.user_id, info.nickname, true),
-  '! \n项目地址: https://github.com/Grasscutters/Grasscutter\n',
-  '最新包发布地址: https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter \n',
-  'Resources 地址: https://github.com/tamilpp25/Grasscutter_Resources \n',
-  '打补丁工具地址: https://github.com/Bambi5/Collei_Launcher\n',
-  '群提供服务地址:  43.139.54.74:20000 \n 账号申请: @我 申请账号 即可\n',
-  '有问题可以尝试@我~\n',
+  ...messages.resources,
   segment.image('https://grasscutter-oicq.oss-cn-hangzhou.aliyuncs.com/message/welcome2.jpg'),
 ]
 
@@ -25,6 +21,15 @@ export const welcome = (info: MemberIncreaseEvent) =>
 export const messages =  {
 
   "grasscutter": "https://github.com/Grasscutters/Grasscutter/",
+
+  "resources": [
+    '! \n项目地址: https://github.com/Grasscutters/Grasscutter\n',
+    '最新包发布地址: https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter \n',
+    'Resources 地址: https://github.com/tamilpp25/Grasscutter_Resources \n',
+    '打补丁工具地址: https://github.com/Bambi5/Collei_Launcher\n',
+    `群提供服务地址: https://${config.server.host}:${config.server.port}\n 账号申请: @我 申请账号 即可\n`,
+    '有问题可以尝试@我~\n'
+  ],
 
   "unlock_map": "解锁全部地图: /prop @uid unlockmap 1",
   

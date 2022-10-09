@@ -51,7 +51,6 @@ export const messageHandlers: Array<Handler> = [
   {
       match: () => true,
       handle: sender => {
-        log('sender', sender)
         sender.rawMessage ? sender.reply(messages.not).then(log).catch(log) : sender.reply(messages.empty).then(log).catch(log)
       }
   },
@@ -60,6 +59,5 @@ export const messageHandlers: Array<Handler> = [
 export const handleMessage = function(sender: Sender) {
 
     const handler = messageHandlers.find(item => item.match(sender))
-    log('handler', handler)
     handler && handler.handle(sender)
 }

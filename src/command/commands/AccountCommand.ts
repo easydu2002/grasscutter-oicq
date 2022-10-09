@@ -1,3 +1,6 @@
+import { log } from './../../util/Log';
+import { getCommandDescripion } from './../command';
+import { config } from "../../..";
 import { createAccount } from "../../api/opencommand-api";
 import { Sender } from "../../model/Sender";
 import { defineCommand } from "../command";
@@ -19,6 +22,9 @@ export const AccountCommand = defineCommand({
         break;
       case '注销':
         break;
+      default:
+        log(this)
+        sender.reply(getCommandDescripion(AccountCommand))
     }
   }
 
@@ -43,7 +49,7 @@ function registerAccount(sender: Sender) {
       }else {
           
         sender.reply('申请成功, 账号信息已发送至私信!', true)
-        sender.sendPrivateMsg(`服务器地址: 43.139.54.74:20000 \n${'='.repeat(10)}\n 登录信息:\n账号: ${accountInfo.username}\n密码: ${accountInfo.password}`)
+        sender.sendPrivateMsg(`服务器地址: https://${config.server.host}:${config.server.port}\n${'='.repeat(10)}\n 登录信息:\n账号: ${accountInfo.username}\n密码: ${accountInfo.password}`)
 
       }
     })

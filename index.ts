@@ -1,5 +1,7 @@
 "use strict"
 
+const config: Config = require('./config.json') 
+
 import { log } from './src/util/Log';
 import { createClient } from "oicq"
 import { welcome } from "./src/messages"
@@ -10,8 +12,6 @@ import { Config } from './src/model/Config';
 commands.forEach(commad => CommandMap.registerCommand(commad))
 
 log('加载', CommandMap.commands.length, '条命令...');
-
-const config: Config = require('./config.json') 
 
 const bot = createClient(config.account)
 
