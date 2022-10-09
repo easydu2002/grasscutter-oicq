@@ -1,10 +1,8 @@
 import { log } from './../../util/Log';
-import { getCommandDescripion } from './../command';
+import { getCommandDescripion, defineCommand } from './../Command';
 import { config } from "../../..";
 import { createAccount } from "../../api/opencommand-api";
 import { Sender } from "../../model/Sender";
-import { defineCommand } from "../command";
-
 
 export const AccountCommand = defineCommand({
   label: '账号',
@@ -23,7 +21,6 @@ export const AccountCommand = defineCommand({
       case '注销':
         break;
       default:
-        log(this)
         sender.reply(getCommandDescripion(AccountCommand))
     }
   }

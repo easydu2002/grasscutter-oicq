@@ -1,4 +1,4 @@
-import { defineCommand, Command, getCommandDescripion } from './../command';
+import { defineCommand, Command, getCommandDescripion } from './../Command';
 import CommandMap from '../CommandMap';
 
 

@@ -1,4 +1,4 @@
-import { defineCommand } from "../command";
+import { defineCommand } from "../Command";
 
 export const ErrorCommand = defineCommand({
   label: '错误',

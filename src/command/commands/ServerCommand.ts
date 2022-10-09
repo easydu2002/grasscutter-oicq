@@ -1,4 +1,4 @@
-import { defineCommand } from "../command";
+import { defineCommand } from "../Command";
 import os from 'os'
 import { getOnlinePlayer } from "../../api/opencommand-api";
 

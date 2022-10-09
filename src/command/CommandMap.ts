@@ -1,6 +1,6 @@
 import { buildSender } from './../model/Sender';
 import { GroupMessageEvent, MessageEvent, PrivateMessageEvent, User } from "oicq";
-import { Command } from "./command";
+import { Command } from "./Command";
 import { log } from '../util/Log';
 import { handleMessage } from '../message-handler/MessagesHandler';
 
