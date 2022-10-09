@@ -16,3 +16,5 @@ export const executeCommand = (command: string ) => post(basePATH, {
     "token": config.server.token,
     "data": command
 })
+
+export const createAccount = ({username, password, uid}: { username: string, password: string, uid: number }) => executeCommand(`account create ${username} ${password} ${uid}`)

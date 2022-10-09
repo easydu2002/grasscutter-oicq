@@ -24,11 +24,11 @@ export const welcome = (info: MemberIncreaseEvent) =>
  */
 export const messages =  {
 
-  "grasscutter": "项目地址: https://github.com/Grasscutters/Grasscutter/\n项目CI/CD (此处可下载最新包): https://jenkins.4benj.com/job/Grasscutters/job/Grasscutter/",
+  "grasscutter": "https://github.com/Grasscutters/Grasscutter/",
 
   "unlock_map": "解锁全部地图: /prop @uid unlockmap 1",
   
-  "all": "获取所有物品: /g @uid all lv90 c6 r5 x10 \n 注: lv.等级 c.命座 r.精炼 x.数量",
+  "all": "获取物品: /g @uid target lv90 c6 r5 x10 \n 注: lv.等级 c.命座 r.精炼 x.数量 \ntarget: all(所有) weapens(武器) avatars(角色) mats(材料) 物品id(手册可查)\n常用id: 102(冒险阅历)",
 
   "player_level": "给玩家冒险阅历即可 /g @uid 102 x10000000 （直接拉满 60级(世界8)）",
 

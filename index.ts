@@ -1,13 +1,15 @@
-
 "use strict"
 
-import { defaultHandlers } from './src/message-handler/common-messages';
-import { handleMessage, registerHandler } from "./src/MessageHandler"
+import { log } from './src/util/Log';
 import { createClient } from "oicq"
 import { welcome } from "./src/messages"
-import { apiHandlers } from "./src/message-handler/api-messages"
-import { Config } from './src/interface/Config';
+import CommandMap from './src/command/CommandMap';
+import commands from './src/command/commands';
+import { Config } from './src/model/Config';
 
+commands.forEach(commad => CommandMap.registerCommand(commad))
+
+log('加载', CommandMap.commands.length, '条命令...');
 
 const config: Config = require('./config.json') 
 
@@ -20,12 +22,9 @@ bot.on("system.login.qrcode", function (e) {
 	})
 }).login()
 
-bot.on("message.private", handleMessage)
-bot.on("message.group",e => e.atme && handleMessage(e))
+bot.on("message.private", CommandMap.invoke)
+bot.on("message.group",e => e.atme && CommandMap.invoke(e))
 bot.on("notice.group.increase", e => bot.sendGroupMsg(e.group_id, welcome(e)))
-
-registerHandler(apiHandlers)
-registerHandler(defaultHandlers)
 
 process.on("unhandledRejection", (reason, promise) => {
 	console.log('Unhandled Rejection at:', promise, 'reason:', reason)

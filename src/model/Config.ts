@@ -11,6 +11,10 @@ export interface Config {
 	 * 管理员qq
 	 */
 	"admin": number,
+	/**
+	 * [可选]管理员密码, token 过期尝试使用
+	 */
+	"password"?: string,
 	
 	"server": {
 
